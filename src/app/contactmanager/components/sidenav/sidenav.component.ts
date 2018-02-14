@@ -16,6 +16,8 @@ export class SidenavComponent implements OnInit {
 
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
   users: Observable<User[]>;
+  isDarkTheme: boolean = false;
+  direction: string = 'ltr';
 
   constructor(zone: NgZone, private userService: UserService, private router: Router) {
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
@@ -35,6 +37,14 @@ export class SidenavComponent implements OnInit {
 
   isScreenSmall(): boolean {
     return this.mediaMatcher.matches;
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
+
+  toggleDirection() {
+    this.direction = this.direction == 'ltr' ? 'rtl' : 'ltr';
   }
 
 }
